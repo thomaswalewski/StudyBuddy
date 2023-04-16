@@ -4,7 +4,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "3030:3000"
     depends_on:
       - backend
   backend:
@@ -20,9 +20,9 @@ services:
     image: mysql:8
     restart: always
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: StudyBuddy  
-      MYSQL_USER: root
+      # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      # MYSQL_DATABASE: StudyBuddy  
+      # MYSQL_USER: root
       MYSQL_PASSWORD_FILE: /run/secrets/secret_db_pw
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/secret_db_root_pw
     volumes:
