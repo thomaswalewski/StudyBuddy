@@ -1,0 +1,30 @@
+.parent-flexible{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    justify-content: space-around;
+    clear: both;
+}
+
+
+@font-face {
+    font-family: ABCFavorit;
+    src: url('../Fonts/ABCFavoritPro-Regular-Trial.otf') format("opentype");
+}
+
+.monitor-square {
+    margin: 7%;
+    margin-bottom: 0%;
+    padding: 6%;
+    align-items: center;
+    border-radius: 20px;
+    font-family: ABCFavorit;
+    background-color: rgb(223, 206, 206);
+    height: fit-content;
+    min-width: 350px;
+    color: #070808;
+    white-space: nowrap;
+}
+

@@ -1,0 +1,67 @@
+.home-back {
+    background-color: rgb(244, 255, 240);
+    height: 100vh;
+    width: auto;
+    font-family: ABCFavorit;
+    max-height: 100vh;
+    
+}
+ 
+.flexible { 
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: auto;
+  clear: both;
+}
+
+@font-face {
+    font-family: StudioFeixen;
+    src: url('./Fonts/StudioFeixenSansEdgyTrial-Regular.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: ABCFavorit;
+    src: url('./Fonts/ABCFavoritPro-Regular-Trial.otf') format("opentype");
+}
+
+.component-square {
+    margin: 7%;
+    margin-top: 2%;
+    margin-bottom: 0%;
+    padding: 1%;
+    align-items: center;
+    border-radius: 20px;
+    font-family: ABCFavorit;
+    background-color: rgb(223, 206, 206);
+    height: fit-content;
+    width: fit-content;
+    color: #070808;
+}
+
+.svg-square {
+    margin: 4%;
+    margin-bottom: 0%;
+    padding: 1%;
+    align-items: center;
+    border-radius: 20px;
+    font-family: ABCFavorit;
+    background-color: rgb(223, 206, 206);
+    height: 100%;
+    width: 100%;
+    color: #070808;
+}
+
+.vert-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-width: max-content;
+    padding: 0%;
+    padding-top: 80px;
+}
+
+
+
+

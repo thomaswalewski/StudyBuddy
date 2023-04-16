@@ -1,0 +1,47 @@
+.New-Task-Form {
+    text-align: left;
+    padding: 5%;
+    height: 70vh;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+}
+
+.New-Task-Form input {
+    background-color: rgb(230, 233, 233);
+    margin: 2%;
+    margin-bottom: 2%;
+    width: 80%;
+    height: 5%;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border: 2px solid #eee;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.New-Task-Form button {
+    margin: 1%;
+    width: 80%;
+    height: 10%;
+    font-size: large;
+    border-radius: 10px;
+    font-family: inherit;
+    border: 0px;
+}
+
+.current-tasks {
+    width: 55%;
+    height: 70%;
+}
+
+.home-flexible { 
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  clear: both;
+  padding-top: 80px;
+}
+
+
+
