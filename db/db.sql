@@ -1,6 +1,6 @@
 CREATE DATABASE StudyBuddy;
-Grant all privileges on StudyBuddy.* TO 'root'@'%';
-FLUSH PRIVILEGES;
+-- Grant all privileges on StudyBuddy.* TO 'root'@'%';
+-- FLUSH PRIVILEGES;
 
 USE StudyBuddy;
 
@@ -36,7 +36,7 @@ insert into users (name, email, pass_word) values ('Sharleen Sauter', 'ssauterj@
 
 
 CREATE TABLE assignments(
-    name Varchar(30) not null,
+    name Varchar(100) not null,
     id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
     hours_needed int default 0,
@@ -191,7 +191,7 @@ insert into assignments (name, user_id, hours_needed, minutes_spent, completed, 
 
 
 CREATE TABLE work_sessions(
-    work_day DATE DEFAULT CURRENT_DATE,
+    work_day DATE, 
     assignment_id int not null,
     id int PRIMARY KEY AUTO_INCREMENT,
     minutes_spent int not null,
@@ -760,7 +760,7 @@ insert into work_sessions (work_day, assignment_id, minutes_spent) values ('2023
 insert into work_sessions (work_day, assignment_id, minutes_spent) values ('2022-05-19', 137, 26);
 
 CREATE TABLE log_ons(
-    session_day DATE DEFAULT CURRENT_DATE,
+    session_day DATE ,
     user_id int not null,
     id int PRIMARY KEY AUTO_INCREMENT,
     minutes_spent int not null,
