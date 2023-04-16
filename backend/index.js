@@ -5,7 +5,7 @@ const cors = require("cors");
 const _ = require("lodash");
 const https = require("https");
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const { json } = require("express");
 const { get } = require("lodash");
 const { stringify } = require("querystring");

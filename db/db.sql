@@ -1,7 +1,3 @@
-CREATE DATABASE StudyBuddy;
--- Grant all privileges on StudyBuddy.* TO 'root'@'%';
--- FLUSH PRIVILEGES;
-
 USE StudyBuddy;
 
 CREATE TABLE users(
