@@ -45,30 +45,17 @@ app.use(
     })
 );
 
-// This is the db connection I use with "node index.js" and it works perfectly
-
-// const db = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "",
-//     database: "StudyBuddy",
-// });
-
-
 // This is the connection that I have been using with docker 
 const db = mysql.createConnection({
     host: "db",
     user: "root",
     password: "",
     database: "StudyBuddy",
+    charset: 'utf8mb4',
     // Here I map to the internal port 3306 because its mapping between containers
     port: 3306,
 });
 
-// When I run the above connection, it connects to the database, but for any query I run
-// it says the table "does not exist". If you want you can try this yourself by running the
-// docker compose up --build and then going to http://localhost:5555/user/5/assignments
-// it will log the error in the console. 
 
 db.connect((err) => {
     if (err) {
@@ -77,13 +64,23 @@ db.connect((err) => {
     console.log("Connected to MYSQL.");
 })
 
+async function initializeConnection() {
+    try {
+        await db.promise().query("SET NAMES 'utf8mb4'");
+        console.log('Character set successfully set to utf8mb4');
+    } catch (error) {
+        console.error('Error setting character set:', error);
+    }
+}
+
+initializeConnection();
 
 
 app.get("/loginState", (req, res) => {
     try {
         let response = { isLoggedIn: false };
-        if (req.session.userEmail) {
-            response = { isLoggedIn: true, userEmail: req.session.userEmail };
+        if (req.session.userId) {
+            response = { isLoggedIn: true, userId: req.session.userId, is_parent: req.session.is_parent, child_id: req.session.child_id };
         }
         res.json(response);
         res.sendStatus(200);
@@ -101,21 +98,31 @@ app.post("/login", async (req, res) => {
         const password = req.body.password;
         if (email && password) {
             console.log("Verifying user...");
-            var query = db.query('select id, email, pass_word from user where email = ' + email, (err, result) => {
+            var query = db.query("select id, email, pass_word, is_parent, child_id from users where email = '" + email + "'", (err, result) => {
                 if (err) {
+                    console.log(err);
                     return res.sendStatus(500);
+                }
+                if (!result) {
+                    res.statusMessage = "email or password does not match.";
+                    res.status(401).end();
                 }
                 const resEmail = result[0].email;
                 const resID = result[0].id;
-                const resPassword = result[0].id;
+                const resPassword = result[0].pass_word;
+                const is_parent = result[0].is_parent;
+                const child_id = result[0].child_id;
                 if (resEmail !== email || resPassword !== password) {
                     console.log("BAD CRIDENTIALS");
                     res.statusMessage = "email or password does not match.";
                     res.status(401).end();
                 }
                 req.session.userEmail = resEmail;
+                req.session.userId = resID;
+                req.session.child_id = child_id;
+                req.session.is_parent = is_parent;
                 console.log(req.session.userEmail);
-                const response1 = { id: resID };
+                const response1 = { email: resEmail };
                 res.json(response1);
                 req.session.save();
                 res.status(201);
@@ -145,7 +152,7 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/user/:id/assignments", (req, res) => {
-    var query = db.query(`select a.name, a.feeling from users u join assignments a on u.id = a.user_id where a.user_id = ` + req.params.id, (err, result) => {
+    var query = db.query(`select a.name, a.id, a.feeling, a.due_date, a.minutes_spent, a.hours_needed from users u join assignments a on u.id = a.user_id where a.user_id = ` + req.params.id + " AND a.completed = 0 order by a.due_date LIMIT 8", (err, result) => {
         if (err) {
             console.log(err)
             return res.sendStatus(500);
@@ -154,8 +161,8 @@ app.get("/user/:id/assignments", (req, res) => {
     })
 });
 
-app.get("/test", (req, res) => {
-    var query = db.query('select * from nums', (err, result) => {
+app.get("/user/:id/completedAssignments", (req, res) => {
+    var query = db.query(`select a.name, a.due_date from users u join assignments a on u.id = a.user_id where a.user_id = ` + req.params.id + " AND a.completed = 1 order by a.due_date LIMIT 8", (err, result) => {
         if (err) {
             console.log(err)
             return res.sendStatus(500);
@@ -164,22 +171,60 @@ app.get("/test", (req, res) => {
     })
 });
 
-app.post("/user/:id/newtask", (req, res) => {
-    if (!req.body.name || !req.body.hours || !req.body.feeling) {
-        return sendStatus(400);
+app.post("/newTask", (req, res) => {
+    if (!req.body.name || !req.body.hours || !req.body.feeling || !req.body.due_date || !req.body.user_id) {
+        return res.sendStatus(400);
     }
-    breaks = req.body.breaks
+    let breaks = req.body.breaks
     if (!breaks) {
         breaks = 0;
     }
-
-
-    var query = db.query('insert into assignments (species, height, garden_id) values)', (err, result) => {
+    var query = db.query(`insert into assignments (name, hours_needed, due_date, feeling, total_breaks, user_id) values 
+    (` + "'" + req.body.name + "'" + `, ` + req.body.hours + `, ` + "'" + req.body.due_date + "' , '" + req.body.feeling + "', " + breaks + ", " + req.body.user_id + `)`, (err, result) => {
         if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+
+        }
+        console.log("Worked");
+        res.sendStatus(201);
+    })
+});
+
+app.get("/parentInfo/:id", (req, res) => {
+    var query = db.query(`select u.name, a.name a.id, a.feeling, a.due_date a.completed from users u join assignments a on u.id = a.user_id where a.user_id = ` + req.params.id + " order by a.due_date LIMIT 10", (err, result) => {
+        if (err) {
+            console.log(err)
             return res.sendStatus(500);
         }
         res.send(result);
     })
 });
+
+app.get("/getName/:id", (req, res) => {
+    var query = db.query(`select name from users where id =` + req.params.id, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.sendStatus(500);
+        }
+        res.send(result);
+    })
+});
+
+app.post("/markTaskComplete", (req, res) => {
+    console.log('request:', req.body);
+    if (!req.body.id) {
+        return res.sendStatus(400);
+    }
+    var query = db.query('UPDATE assignments SET completed = 1 WHERE id = ' + req.body.id, (err, result) => {
+        if (err) {
+            console.log('Failed query:', err);
+            return res.sendStatus(500);
+        }
+        console.log("Worked");
+        res.status(201).json({ message: "Task marked as complete." });
+    })
+});
+
 
 app.listen(5555, () => console.log("up and running"));

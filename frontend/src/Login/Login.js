@@ -2,21 +2,28 @@ import '../components.css';
 import './login.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { login, checkLogin } from '../Utils/auth';
+import { login } from '../Utils/auth';
+import { checkLogin } from '../Utils/auth';
 
 
 function Login() {
 
-    const [email, setEmail] = useState("example@buddy.com");
-    const [password, setPassword] = useState("12345");
+    const [email, setEmail] = useState("jdoe@gmail.com");
+    const [password, setPassword] = useState("LhP0yZ");
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+
+    async function handleSubmit(e) {
         e.preventDefault();
         console.log("working");
-        login(email, password);
-        const result = await checkLogin();
-        if (result.isLoggedIn === true) navigate('/home');
+        const result = await login(email, password);
+        const parent_result = await checkLogin();
+        const is_parent = parent_result.is_parent.data[0];
+        console.log("result:")
+        console.log(result);
+        if (result.email === email && is_parent === 0) navigate('/');
+        if (result.email === email && is_parent === 1) navigate('/parent');
+
     }
 
     return (

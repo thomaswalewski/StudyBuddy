@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-evenly;
   clear: both;
-  padding-top: 80px;
+  padding-top: max(7vh, 80px);
   padding-left: 0%;
 }
 
@@ -22,6 +22,7 @@
     white-space: nowrap;
     color: rgb(75, 95, 112);
     width: fit-content;
+    margin: 1%;
 }
 
 .work-square {
@@ -35,6 +36,8 @@
     height: fit-content;
     width: auto;
     color: #070808;
+    border: 1px solid rgb(75, 95, 112);
+    box-shadow: 0px 0px 3px rgb(75, 95, 112); 
 }
 
 .work-button {
@@ -49,8 +52,38 @@
 }
 
 .timer-text {
-    font-size: calc(80px + 2vmin);
+    font-size: calc(70px + 2vmin);
     margin: 0%;
+}
+
+.minutes-input {
+    background-color: rgb(230, 233, 233);
+    margin: 2%;
+    margin-bottom: 2%;
+    width: 70%;
+    min-width: fit-content;
+    height: 5%;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border: 2px solid #eee;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 20px;
+    flex-grow: 1;
+}
+
+.minutes-title{
+    font-size: 20px;
+    margin-right: 0.5rem;
+}
+
+.input-container {
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
 }
 
 

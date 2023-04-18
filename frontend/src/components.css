@@ -12,7 +12,6 @@
   text-align: center;
   align-items: flex-start;
   justify-content: space-between;
-  margin: auto;
   clear: both;
 }
 
@@ -38,6 +37,8 @@
     height: fit-content;
     width: fit-content;
     color: #070808;
+    border: 1px solid rgb(75, 95, 112);
+    box-shadow: 0px 0px 3px rgb(75, 95, 112); 
 }
 
 .svg-square {
@@ -51,15 +52,26 @@
     height: 100%;
     width: 100%;
     color: #070808;
+    border: 1px solid rgb(75, 95, 112);
+    box-shadow: 0px 0px 3px rgb(75, 95, 112); 
 }
 
-.vert-flex{
+.vert-flex {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    min-width: max-content;
-    padding: 0%;
-    padding-top: 80px;
+    width: 100%;
+    min-width: min(100%, 350px);
+    height: 90%;
+    padding: 0px;
+    padding-top: max(7vh, 80px);
+}
+
+.flexible-desc { 
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  clear: both;
 }
 
 
