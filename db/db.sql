@@ -12,7 +12,7 @@ CREATE TABLE users(
     child_id int default null
 );
 
-insert into users (name, email, pass_word) values ('John Doe', 'jdoe@gmail.com', 'LhP0yZ');
+insert into users (name, email, pass_word) values ('John Doe', 'jdoe@gmail.com', '54321');
 insert into users (name, email, pass_word) values ('Jarid Karczinski', 'jkarczinski1@mac.com', 'umNEuY');
 insert into users (name, email, pass_word) values ('Darwin Danelet', 'ddanelet2@discovery.com', '05gT3tIAx73');
 insert into users (name, email, pass_word) values ('Murielle Burree', 'mburree3@constantcontact.com', 'd7qgjo2F55z');
