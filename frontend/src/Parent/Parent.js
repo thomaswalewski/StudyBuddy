@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import getAssignments from '../Utils/GetAssignments';
 import getCompletedAssignments from '../Utils/getCompletedAssignments';
 import getName from '../Utils/getName';
+import ParentAssignmentli from './parentAssignmentLi';
 
 function ParentMode() {
 
@@ -93,8 +94,8 @@ function ParentMode() {
                             Recently Completed Tasks:
                         </h2>
                         <ol className='assignment-list'>
-                            {completedAssignments?.map(item => (
-                                <div key={item.id}>{assignmentli(item)}</div>
+                            {completedAssignments?.map((item, index) => (
+                                <div key={item.id}><ParentAssignmentli {...item} index={index} /></div>
                             )) || "no assignments"}
                         </ol>
 
@@ -121,8 +122,8 @@ function ParentMode() {
                             Upcoming Tasks:
                         </h2>
                         <ol className='assignment-list'>
-                            {assignments?.map(item => (
-                                <div key={item.id}>{assignmentli(item)}</div>
+                            {assignments?.map((item, index) => (
+                                <div key={item.id}><ParentAssignmentli {...item} index={index} /></div>
                             )) || "no assignments"}
                         </ol>
 
@@ -149,13 +150,3 @@ function ParentMode() {
 }
 
 export default ParentMode
-
-
-function assignmentli(props) {
-
-    return <li className='list-item'>
-        <h2 className='list-text'>
-            {props.name}
-        </h2>
-    </li >
-}

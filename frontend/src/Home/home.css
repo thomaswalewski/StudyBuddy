@@ -1,10 +1,11 @@
 .New-Task-Form {
     text-align: left;
     padding: 5%;
-    height: 70%;
+    height: 70vh;
     flex-direction: column;
     justify-content: space-between;
     display: flex;
+    white-space: nowrap;
 }
 
 .New-Task-Form input {
@@ -17,6 +18,7 @@
     border: 2px solid #eee;
     border-radius: 5px;
     font-family: inherit;
+    min-height: max-content;
 }
 
 .New-Task-Form select {
@@ -61,36 +63,52 @@
   padding-right: 40px;
 }
 
-.list-text { 
-    font-size: calc(25+2vh);
-    margin: 0%;
-    white-space: nowrap;
-    width: fit-content
-}
-
 .assignment-list { 
-    font-size: calc(25+2vh);
+    font-size: calc(22+2vh);
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
-.assignment-list li::before{
-    font-size: calc(25+2vh);
+.list-flexible {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 2%
 }
 
-.list-feeling { 
-    margin-right: min(150px, 20vw);
-    margin-left: 20px;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: calc(25+2vh);
+.list-text,
+.list-feeling {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: left;
     white-space: nowrap;
 }
 
-.list-item{
+.list-item {
     margin-top: 5%;
     margin-bottom: 5%;
-    font-size: calc(25+2vh);
     white-space: nowrap;
 }
 
+.list-h2{
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
+.number{
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.flexible-title { 
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  justify-content: left;
+  clear: both;
+}
 

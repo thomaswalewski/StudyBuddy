@@ -123,7 +123,7 @@ insert into assignments (name, user_id, hours_needed, minutes_spent, completed, 
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('LDAR', 5, 7, 130, 1, 3, 0, '2022-12-09');
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('VNC', 16, 8, 66, 1, 4, 0, '2022-09-03');
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('Community Organizing', 3, 15, 77, 0, 5, 2, '2022-12-16');
-insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('Biology Homework', 1, 15, 62, 0, 5, 1,'2022-04-23');
+insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('Biology Homework', 1, 15, 62, 0, 5, 1,'2023-04-23');
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('MW', 15, 8, 36, 1, 4, 1, '2023-03-26');
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('Nightlife', 17, 3, 4, 1, 3, 1, '2022-12-14');
 insert into assignments (name, user_id, hours_needed, minutes_spent, completed, total_breaks, breaks_taken, due_date) values ('Lync', 5, 12, 150, 0, 3, 0, '2022-04-27');
